@@ -25,7 +25,7 @@ class Worker(threading.Thread):
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
-        sys.exit('USAGE:   python3 NameofPythonFile.py keyword path[,path...]\nEXAMPLE: python3 A.py keyword *')
+        sys.exit('USAGE:   python3 NameofPythonFile.py keyword path[ path...]\nEXAMPLE: python3 A.py keyword *')
     keyword = sys.argv[1]
     for path in sys.argv[2:]:
         if not os.access(path, os.R_OK):
