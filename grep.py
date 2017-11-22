@@ -22,12 +22,12 @@ class Worker(threading.Thread):
                             line.replace(keyword, '\033[1;31m'+keyword+'\033[1;m'))
                 count_line += 1
 
-
-if __name__ == '__main__':
-    if len(sys.argv) < 3:
+def grep(args):
+    global path,keyword
+    if len(args) < 3:
         sys.exit('USAGE:   python3 NameofPythonFile.py keyword path[ path...]\nEXAMPLE: python3 A.py keyword *')
-    keyword = sys.argv[1]
-    for path in sys.argv[2:]:
+    keyword = args[1]
+    for path in args[2:]:
         if not os.access(path, os.R_OK):
             print('ERROR: ', path, ': Permission denied')
         elif os.path.isdir(path):
@@ -35,3 +35,8 @@ if __name__ == '__main__':
         else:
             w = Worker(args=(path, keyword))
             w.start()
+
+
+
+if __name__ == '__main__':
+    grep(sys.argv)
